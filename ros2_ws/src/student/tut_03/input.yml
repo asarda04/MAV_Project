@@ -1,0 +1,42 @@
+density: 1000
+gravity: 9.80665
+
+name: sookshma
+length: 1
+breadth: 0.25
+speed: 0.5
+
+mass: 7.5 # Mass of the vessel in kg
+cog: [0.029,  0.0,  0.136] # Location of center of gravity in the vessel frame
+gyration: [0.1, 0.25, 0.25] # Diagonal elements of gyration tensor about CoG
+T_delta: 0.1 # Rudder time constant
+
+initial_velocity: [0.5, 0.0, 0.0, 0.0, 0.0, 0.0] # Initial velocity of the vessel
+initial_position: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0] # Initial position of the vessel
+
+sim_time: 200 # Simulation time in seconds
+time_step: 0.1 # Time step size
+
+control_type: switching_rudder
+
+hydrodynamic_coefficients: /workspaces/mavlab/ros2_ws/src/student/tut_03/hyd.yml
+
+sensors:
+  - 
+    sensor_type: IMU
+    sensor_location: [0.0, 0.0, 0.0]
+    sensor_orientation: [0.0, 0.0, 0.0]
+    topic: /imu/data
+    rate: 100
+    noise:
+      - orientation_covariance: [[ 4.97116638e-07,  1.92100383e-07, -5.37921803e-06], [ 1.92100383e-07,  4.19220441e-07, -2.48717925e-06], [-5.37921803e-06, -2.48717925e-06,  1.15176790e-04]]
+      - linear_acceleration_covariance: [[ 0.01973958, -0.01976063,  0.02346221], [-0.01976063,  0.0211394,  -0.02188356], [ 0.02346221, -0.02188356,  0.03132967]]
+      - angular_velocity_covariance: [[ 5.28022053e-05,  4.08840955e-05, -1.15368805e-05], [ 4.08840955e-05,  3.58062060e-05, -8.83069166e-06], [-1.15368805e-05, -8.83069166e-06,  5.01080310e-06]]
+  - 
+    sensor_type: UWB
+    sensor_location: [0.29, 0.0, 0.07]
+    sensor_orientation: [0.0, 0.0, 0.0]
+    topic: /makara_00/uwb_00
+    rate: 1
+    noise:
+      - position_covariance: [[ 0.04533883, -0.05014115,  0.        ], [-0.05014115,  0.05869406,  0.        ], [ 0.,          0.,          0.00000001]]
